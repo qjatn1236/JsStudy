@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Dropzone.css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" rel="stylesheet" />
+
+    <!-- Dropzone.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+  </head>
+  <body>
+    <form action="/upload" class="dropzone"></form>
+
+    <script>
+      // Dropzone을 해당 폼에 연결
+      Dropzone.options.myDropzone = {
+        paramName: 'file', // 서버에 전송될 때의 파일 이름
+        maxFilesize: 2, // 최대 파일 크기 (MB 단위)
+        maxFiles: 5, // 최대 허용 파일 수
+        acceptedFiles: '.jpg, .png, .gif', // 허용되는 파일 형식
+        init: function () {
+          this.on('success', function (file, response) {
+            // 파일 업로드 성공 시 동작
+            console.log('File uploaded:', file, response);
+          });
+        },
+      };
+    </script>
+  </body>
+</html>

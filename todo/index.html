@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList</title>
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <div id="todo_wrap">
+      <div class="todo_list">
+        <h1>최지영의 ToDo List</h1>
+
+        <input type="text" class="todo_value" />
+        <button class="todo_btn">추가</button>
+
+        <div class="todo_box"></div>
+
+        <h1>완료</h1>
+        <div class="todo_complete_box"></div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
+
+<!-- 
+getTodosFromLocal()
+updateTodoDom (todoText)
+
+새로 추가할 때는 updateTodoDom에다가 사용자가 입력한 텍스트를 
+인자로 넣어서 돔 업데이트 하는 함수!! 
+-->

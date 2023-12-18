@@ -1,0 +1,25 @@
+#todo_wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+#todo_wrap .todo_list {
+  width: 100%;
+  height: 500px;
+}
+
+#todo_wrap .todo_list h1 {
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#todo_wrap .todo_list p {
+  display: inline-block;
+}
+
+#todo_wrap .todo_list .todo_box {
+  padding: 50px;
+}
