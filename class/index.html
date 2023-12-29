@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <script>
+      let clsUtils = {
+        ssname: 'testcookie',
+        init: function (nm) {
+          this.setCname(nm);
+          if (arguments.length > 1) {
+          }
+        },
+        setCname: function (cname) {
+          this.ssname = cname;
+        },
+        setCookie: function (cname) {
+          var todayDate = new Date();
+          todayDate.setDate(todayDate.getDate() + 30);
+          document.cookie = this.ssname + '=' + escape('oks') + '; path=/; expires=' + todayDate.toGMTString() + ';';
+        },
+        getCookie: function (cname) {
+          var cookieValue = '없음';
+          if (document.cookie) {
+            var array = document.cookie.split(escape(cname) + '=');
+            if (array.length >= 2) {
+              var arraySub = array[1].split(';');
+              cookieValue = unescape(arraySub[0]);
+            }
+          }
+          return cookieValue;
+        },
+      };
+
+      function ctlCookie(mode) {
+        var cookiename = 'testcookie';
+        if (mode == 'save') {
+          clsUtils.setCookie(cookiename);
+          alert('저장 되었습니다.');
+        } else {
+          var sCookie = clsUtils.getCookie(cookiename);
+          alert(sCookie);
+        }
+      }
+
+      //  prototype을 사용하면 clsUtils 밖에 있더라도 clsUtils에 this를 참조할 수 있다.
+      clsUtils.prototype.getLayout = function (cname) {
+        var cookieValue = '없음';
+        if (document.cookie) {
+          var array = document.cookie.split(escape(cookieName) + '=');
+          if (array.length >= 2) {
+            var arraySub = array[1].split(';');
+            cookieValue = unescape(arraySub[0]);
+          }
+        }
+        return cookieValue;
+      };
+      // prototype을 사용하면 clsUtils 밖에 있더라도 clsUtils에 this 참조할 수 있다.
+
+      window.onload(function () {
+        clsUtils.init('cookies');
+      });
+    </script>
+  </head>
+  <body>
+    <a href="javascript:ctlCookie('save');">쿠키 저장하기</a><br />
+    <a href="javascript:ctlCookie('call');">쿠키 불러오기</a><br />
+  </body>
+</html>
