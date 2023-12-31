@@ -2,60 +2,58 @@
   <head>
     <script>
       let clsUtils = {
-        ssname: 'testcookie',
-        init: function (nm) {
-          this.setCname(nm);
-          if (arguments.length > 1) {
-          }
+        ssname: "testcookie",
+
+        init: function (...args) {
+          console.log(args);
+          // this.setCname(nm);
+          // if (arguments.length > 1) {
+          // }
         },
+
         setCname: function (cname) {
           this.ssname = cname;
         },
-        setCookie: function (cname) {
-          var todayDate = new Date();
-          todayDate.setDate(todayDate.getDate() + 30);
-          document.cookie = this.ssname + '=' + escape('oks') + '; path=/; expires=' + todayDate.toGMTString() + ';';
+
+        setCookie: function (cookieName, cookieValue, cookieDuration) {
+          let Day = new Date();
+          Day.setDate(Day.getDate() + cookieDuration);
+          document.cookie = cookieName + "=" + cookieValue + "; path=/; expires=" + Day;
         },
-        getCookie: function (cname) {
-          var cookieValue = '없음';
-          if (document.cookie) {
-            var array = document.cookie.split(escape(cname) + '=');
-            if (array.length >= 2) {
-              var arraySub = array[1].split(';');
-              cookieValue = unescape(arraySub[0]);
+
+        getCookie: function (name) {
+          const cookieArray = document.cookie.split(";");
+          let foundCookie = null;
+
+          cookieArray.forEach(function (item) {
+            let cookie = item.trim();
+            if (cookie.indexOf(name + "=") === 0) {
+              foundCookie = cookie.substring(name.length + 1);
             }
-          }
-          return cookieValue;
+          });
+          console.log(foundCookie);
+          return foundCookie;
         },
       };
 
-      function ctlCookie(mode) {
-        var cookiename = 'testcookie';
-        if (mode == 'save') {
-          clsUtils.setCookie(cookiename);
-          alert('저장 되었습니다.');
-        } else {
-          var sCookie = clsUtils.getCookie(cookiename);
-          alert(sCookie);
-        }
-      }
-
-      //  prototype을 사용하면 clsUtils 밖에 있더라도 clsUtils에 this를 참조할 수 있다.
-      clsUtils.prototype.getLayout = function (cname) {
-        var cookieValue = '없음';
-        if (document.cookie) {
-          var array = document.cookie.split(escape(cookieName) + '=');
-          if (array.length >= 2) {
-            var arraySub = array[1].split(';');
-            cookieValue = unescape(arraySub[0]);
-          }
-        }
-        return cookieValue;
-      };
+      // prototype을 사용하면 clsUtils 밖에 있더라도 clsUtils에 this를 참조할 수 있다.
+      // clsUtils.prototype.getLayout = function (cname) {
+      //   var cookieValue = "없음";
+      //   if (document.cookie) {
+      //     var array = document.cookie.split(escape(cookieName) + "=");
+      //     if (array.length >= 2) {
+      //       var arraySub = array[1].split(";");
+      //       cookieValue = unescape(arraySub[0]);
+      //     }
+      //   }
+      //   return cookieValue;
+      // };
       // prototype을 사용하면 clsUtils 밖에 있더라도 clsUtils에 this 참조할 수 있다.
 
-      window.onload(function () {
-        clsUtils.init('cookies');
+      window.addEventListener("load", function () {
+        clsUtils.init("cookies");
+        clsUtils.setCookie("cookie", "value", 1);
+        clsUtils.getCookie("cookie");
       });
     </script>
   </head>
