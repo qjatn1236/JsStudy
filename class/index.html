@@ -2,7 +2,7 @@
   <head>
     <script>
       let clsUtils = {
-        ssname: "testcookie",
+        ssname: 'testcookie',
 
         init: function (...args) {
           console.log(args);
@@ -14,28 +14,109 @@
         setCname: function (cname) {
           this.ssname = cname;
         },
-
+        // 쿠키 셋팅
         setCookie: function (cookieName, cookieValue, cookieDuration) {
           let Day = new Date();
           Day.setDate(Day.getDate() + cookieDuration);
-          document.cookie = cookieName + "=" + cookieValue + "; path=/; expires=" + Day;
+          document.cookie = cookieName + '=' + cookieValue + '; path=/; expires=' + Day;
         },
 
+        // 쿠키 가져오기
         getCookie: function (name) {
-          const cookieArray = document.cookie.split(";");
+          const cookieArray = document.cookie.split(';');
           let foundCookie = null;
 
           cookieArray.forEach(function (item) {
             let cookie = item.trim();
-            if (cookie.indexOf(name + "=") === 0) {
+            if (cookie.indexOf(name + '=') === 0) {
               foundCookie = cookie.substring(name.length + 1);
             }
           });
           console.log(foundCookie);
           return foundCookie;
         },
-      };
 
+        // 팝업 닫기
+
+        // 파라미터 체크
+
+        // 비동기 통신
+
+        // 폼 만들기
+      };
+      // 팝업 컨트롤러
+      let layerPopup = {
+        popupArr: [],
+        zIndex: 999,
+        // 특정 팝업 열기
+        openPopup: function (popupId, dimFlag) {
+          var $popupEl = $('#' + popupId);
+          var _ = this;
+          var $closeBtn = $popupEl.find('.popup-close');
+          var $popupContainer = $popupEl.find('.popup-container');
+          // 팝업 배열에 담기
+          _.popupArr.push($popupEl);
+
+          // 팝업 오픈
+          $popupEl.addClass('open').css({
+            zIndex: _.zIndex + _.popupArr.length,
+          });
+
+          // 팝업 위에 팝업띄울때 dim처리
+          if (_.popupArr.length > 1) {
+            $popupEl.css('background-color', 'rgba(0,0,0,0.5)');
+          }
+
+          // body 스크롤 막기
+          $('body').addClass('scroll-disable');
+          if (!$('.layer-popup-dim').length) {
+            // dim없을경우 생성
+            $('body').append('<div class="layer-popup-dim"></div>');
+          }
+
+          $('.layer-popup-dim').addClass('show');
+
+          // 팝업닫기 눌렀을때
+          $closeBtn.off('click');
+          $closeBtn.on('click', function (e) {
+            e.preventDefault();
+            _.closePopup();
+          });
+
+          if (!dimFlag) {
+            // dim 클릭시 팝업 전부 닫기
+            $popupEl.off('click');
+            $popupEl.on('click', function (e) {
+              if (!$(e.target).closest($popupContainer).length) {
+                _.closePopup();
+              }
+            });
+          }
+        },
+        // 특정 팝업 닫기
+        closePopup: function (popupId) {
+          var _ = this;
+          var $popupEl = popupId ? $('#' + popupId) : _.popupArr[_.popupArr.length - 1];
+          $popupEl.removeClass('open');
+          _.popupArr = _.popupArr.filter(function (item) {
+            return item.attr('id') !== $popupEl.attr('id');
+          });
+          if (_.popupArr.length === 0) {
+            $('.layer-popup-dim').removeClass('show');
+            $('body').removeClass('scroll-disable');
+          }
+        },
+        // 모든 팝업 닫기
+        closeAllPopup: function () {
+          var _ = this;
+          for (var i = 0; i < _.popupArr.length; i++) {
+            _.popupArr[i].removeClass('open');
+          }
+          _.popupArr = [];
+          $('body').removeClass('scroll-disable');
+          $('.layer-popup-dim').removeClass('show');
+        },
+      };
       // prototype을 사용하면 clsUtils 밖에 있더라도 clsUtils에 this를 참조할 수 있다.
       // clsUtils.prototype.getLayout = function (cname) {
       //   var cookieValue = "없음";
@@ -50,15 +131,12 @@
       // };
       // prototype을 사용하면 clsUtils 밖에 있더라도 clsUtils에 this 참조할 수 있다.
 
-      window.addEventListener("load", function () {
-        clsUtils.init("cookies");
-        clsUtils.setCookie("cookie", "value", 1);
-        clsUtils.getCookie("cookie");
+      window.addEventListener('load', function () {
+        clsUtils.init('cookies');
+        clsUtils.setCookie('cookie', 'value', 1);
+        clsUtils.getCookie('cookie');
       });
     </script>
   </head>
-  <body>
-    <a href="javascript:ctlCookie('save');">쿠키 저장하기</a><br />
-    <a href="javascript:ctlCookie('call');">쿠키 불러오기</a><br />
-  </body>
+  <body></body>
 </html>
