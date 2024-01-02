@@ -1,9 +1,12 @@
 <html>
   <head>
     <script>
+      clsUtils.popname;
+
       let clsUtils = {
         ssname: 'testcookie',
-
+        _this: this,
+        popName: 'divPopName',
         init: function (...args) {
           console.log(args);
           // this.setCname(nm);
@@ -133,8 +136,7 @@
 
       window.addEventListener('load', function () {
         clsUtils.init('cookies');
-        clsUtils.setCookie('cookie', 'value', 1);
-        clsUtils.getCookie('cookie');
+
       });
     </script>
   </head>
