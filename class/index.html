@@ -96,19 +96,24 @@
             });
           }
         },
+
         // 특정 팝업 닫기
         closePopup: function (popupId) {
           var _ = this;
+
           var $popupEl = popupId ? $("#" + popupId) : _.popupArr[_.popupArr.length - 1];
+
           $popupEl.removeClass("open");
           _.popupArr = _.popupArr.filter(function (item) {
             return item.attr("id") !== $popupEl.attr("id");
           });
-          if (_.popupArr.length === 0) {
-            $(".layer-popup-dim").removeClass("show");
-            $("body").removeClass("scroll-disable");
+
+          if (popupArr.length === 0) {
+            document.querySelector(".layer-popup-dim").classList.remove("show");
+            document.body.classList.remove("scroll-disable");
           }
         },
+
         // 모든 팝업 닫기
         closeAllPopup: function () {
           var _ = this;
@@ -120,6 +125,7 @@
           $(".layer-popup-dim").removeClass("show");
         },
       };
+
       // prototype을 사용하면 clsUtils 밖에 있더라도 clsUtils에 this를 참조할 수 있다.
       // clsUtils.prototype.getLayout = function (cname) {
       //   var cookieValue = "없음";
@@ -151,6 +157,8 @@
       (function () {
         clsUtils.getCookieState();
       })();
+
+      console.log(layerPopup.closePopup);
     </script>
   </head>
   <body>
