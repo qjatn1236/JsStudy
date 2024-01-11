@@ -19,7 +19,8 @@
         setCookie: function (cookieName, cookieValue, cookieDuration) {
           let Day = new Date();
           Day.setDate(Day.getDate() + cookieDuration);
-          document.cookie = cookieName + "=" + cookieValue + "; path=/; expires=" + Day;
+          document.cookie =
+            cookieName + "=" + cookieValue + "; path=/; expires=" + Day;
         },
 
         // 쿠키 가져오기
@@ -44,9 +45,15 @@
         // 파라미터 체크
 
         // 비동기 통신
+        getData: function () {
+          fetch("https://https://jsonplaceholder.typicode.com/comments").then(
+            (res) => console.log(res)
+          );
+        },
 
         // 폼 만들기
       };
+
       // 팝업 컨트롤러
       let layerPopup = {
         popupArr: [],
@@ -101,7 +108,9 @@
         closePopup: function (popupId) {
           var _ = this;
 
-          var $popupEl = popupId ? $("#" + popupId) : _.popupArr[_.popupArr.length - 1];
+          var $popupEl = popupId
+            ? $("#" + popupId)
+            : _.popupArr[_.popupArr.length - 1];
 
           $popupEl.removeClass("open");
           _.popupArr = _.popupArr.filter(function (item) {
@@ -156,9 +165,8 @@
 
       (function () {
         clsUtils.getCookieState();
+        clsUtils.getData();
       })();
-
-      console.log(layerPopup.closePopup);
     </script>
   </head>
   <body>
