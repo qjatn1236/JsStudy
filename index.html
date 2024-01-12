@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   function getBrowser() {
+      //     const browsers = [
+      //       "Chrome",
+      //       "Opera",
+      //       "WebTV",
+      //       "Whale",
+      //       "Beonex",
+      //       "Chimera",
+      //       "NetPositive",
+      //       "Phoenix",
+      //       "Firefox",
+      //       "Safari",
+      //       "SkipStone",
+      //       "Netscape",
+      //       "Mozilla",
+      //     ];
+
+      //     const userAgent = window.navigator.userAgent.toLowerCase();
+
+      //     if (userAgent.includes("edg")) {
+      //       return "Edge";
+      //     }
+
+      //     if (userAgent.includes("trident") || userAgent.includes("msie")) {
+      //       return "Internet Explorer";
+      //     }
+
+      //     return (
+      //       browsers.find((browser) =>
+      //         userAgent.includes(browser.toLowerCase())
+      //       ) || "Other"
+      //     );
+      //   }
+
+      //   // -----------------------------------------
+
+      //   document.querySelector(".content p").innerHTML = getBrowser();
+      
+      var agent = navigator.userAgent.toLowerCase();
+      if (
+        navigator.appName == "Netscape" &&
+        navigator.userAgent.search("Trident") != -1
+      ) {
+        console.log("인터넷 익스플로러 브라우저 입니다.");
+      } else if (agent.indexOf("msie") != -1) {
+        console.log("인터넷 익스플로러 10이하 브라우저 입니다.");
+      } else {
+        console.log("인터넷 익스플로러 브라우저가 아닙니다.");
+      }
+    </script>
+  </body>
+</html>

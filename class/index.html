@@ -33,7 +33,7 @@
             if (cookie.indexOf(name + "=") === 0) {
               foundCookie = cookie.substring(name.length + 1);
             }
-          });
+          }); 
 
           return foundCookie;
         },
@@ -45,10 +45,25 @@
         // 파라미터 체크
 
         // 비동기 통신
-        getData: function () {
-          fetch("https://https://jsonplaceholder.typicode.com/comments").then(
-            (res) => console.log(res)
-          );
+        getData: async function (url, method, data, accessToken, refreshToken) {
+          const requestOptions = {
+            method,
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`, // accessToken을 "Authorization" 헤더에 넣음
+              refresh: `${refreshToken}`, // refresh 토큰을 헤더에 넣음
+            },
+            body: method === "POST" ? JSON.stringify(data) : undefined,
+            withCredentials: true,
+          };
+
+          try {
+            const response = await fetch(url);
+            const responseData = await response.json();
+            console.log(responseData);
+          } catch (error) {
+            console.log(error);
+          }
         },
 
         // 폼 만들기
@@ -165,7 +180,9 @@
 
       (function () {
         clsUtils.getCookieState();
-        clsUtils.getData();
+        clsUtils.getData(
+          "https://jsonplaceholder.typicode.com/posts/1/comments"
+        );
       })();
     </script>
   </head>
