@@ -44,17 +44,28 @@
       //   // -----------------------------------------
 
       //   document.querySelector(".content p").innerHTML = getBrowser();
-      
-      var agent = navigator.userAgent.toLowerCase();
-      if (
-        navigator.appName == "Netscape" &&
-        navigator.userAgent.search("Trident") != -1
-      ) {
-        console.log("인터넷 익스플로러 브라우저 입니다.");
+
+      const isBrowser = {
+        getFetchData: function () {
+          console.log("패치 함수");
+        },
+
+        getAjax: function () {
+          console.log("익스 11");
+        },
+
+        getAjaxHandling: function () {
+          console.log("익스 10 이하");
+        },
+      };
+
+      const agent = navigator.userAgent.toLowerCase();
+      if (navigator.appName == "Netscape" && navigator.userAgent.search("Trident") != -1) {
+        isBrowser.getAjax();
       } else if (agent.indexOf("msie") != -1) {
-        console.log("인터넷 익스플로러 10이하 브라우저 입니다.");
+        isBrowser.getAjaxHandling();
       } else {
-        console.log("인터넷 익스플로러 브라우저가 아닙니다.");
+        isBrowser.getFetchData();
       }
     </script>
   </body>
