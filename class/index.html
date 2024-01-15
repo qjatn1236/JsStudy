@@ -33,7 +33,7 @@
             if (cookie.indexOf(name + "=") === 0) {
               foundCookie = cookie.substring(name.length + 1);
             }
-          }); 
+          });
 
           return foundCookie;
         },
@@ -45,7 +45,7 @@
         // 파라미터 체크
 
         // 비동기 통신
-        getData: async function (url, method, data, accessToken, refreshToken) {
+        getFetchData: async function (url, method, data, accessToken, refreshToken) {
           const requestOptions = {
             method,
             headers: {
@@ -180,7 +180,7 @@
 
       (function () {
         clsUtils.getCookieState();
-        clsUtils.getData(
+        clsUtils.getFetchData(
           "https://jsonplaceholder.typicode.com/posts/1/comments"
         );
       })();

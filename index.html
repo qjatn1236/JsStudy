@@ -6,66 +6,72 @@
     <title>Document</title>
   </head>
   <body>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
-      //   function getBrowser() {
-      //     const browsers = [
-      //       "Chrome",
-      //       "Opera",
-      //       "WebTV",
-      //       "Whale",
-      //       "Beonex",
-      //       "Chimera",
-      //       "NetPositive",
-      //       "Phoenix",
-      //       "Firefox",
-      //       "Safari",
-      //       "SkipStone",
-      //       "Netscape",
-      //       "Mozilla",
-      //     ];
+      var isBrowser = {
+        // getFetchData: async function (url) {
+        getFetchData: function (url) {
+          // const requestOptions = {
+          //   method,
+          //   headers: {
+          //     "Content-Type": "application/json",
+          //     Authorization: `Bearer ${accessToken}`, // accessToken을 "Authorization" 헤더에 넣음
+          //     refresh: `${refreshToken}`, // refresh 토큰을 헤더에 넣음
+          //   },
+          //   body: method === "POST" ? JSON.stringify(data) : undefined,
+          //   withCredentials: true,
+          // };
 
-      //     const userAgent = window.navigator.userAgent.toLowerCase();
+          try {
+            // const response = await fetch(url);
+            // const responseData = await response.json();
 
-      //     if (userAgent.includes("edg")) {
-      //       return "Edge";
-      //     }
-
-      //     if (userAgent.includes("trident") || userAgent.includes("msie")) {
-      //       return "Internet Explorer";
-      //     }
-
-      //     return (
-      //       browsers.find((browser) =>
-      //         userAgent.includes(browser.toLowerCase())
-      //       ) || "Other"
-      //     );
-      //   }
-
-      //   // -----------------------------------------
-
-      //   document.querySelector(".content p").innerHTML = getBrowser();
-
-      const isBrowser = {
-        getFetchData: function () {
-          console.log("패치 함수");
+            var response = fetch(url);
+            var responseData = response.json();
+            console.log(responseData);
+          } catch (error) {
+            console.log(error);
+          }
         },
 
-        getAjax: function () {
-          console.log("익스 11");
+        getAjaxData: function (url) {
+          $.ajax({
+            method: "get",
+            url: url,
+            dataType: "json",
+            success: function (response) {
+              // console.log("data : : " + JSON.stringify(data));
+              console.log(response);
+            },
+            error: function () {
+              console.log('error');
+            }
+       
+          });
         },
 
         getAjaxHandling: function () {
-          console.log("익스 10 이하");
-        },
+          alert('익스10 이하는 컴터를 바꿔줘')
+        }
       };
 
-      const agent = navigator.userAgent.toLowerCase();
-      if (navigator.appName == "Netscape" && navigator.userAgent.search("Trident") != -1) {
-        isBrowser.getAjax();
-      } else if (agent.indexOf("msie") != -1) {
+      var agent = window.navigator.userAgent.toLowerCase();
+      if (agent.indexOf("chrome") > -1) {
+        isBrowser.getFetchData(
+          "https://jsonplaceholder.typicode.com/posts/1/comments"
+        );
+        console.log("패치");
+      }
+
+      if (agent.indexOf("trident") > -1) {
+        isBrowser.getAjaxData(
+          "https://jsonplaceholder.typicode.com/posts/1/comments"
+        );
+        console.log("아작스");
+      }
+      //
+      else if (agent.indexOf("MSIE") !== -1) {
         isBrowser.getAjaxHandling();
-      } else {
-        isBrowser.getFetchData();
       }
     </script>
   </body>
