@@ -9,26 +9,34 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
       var isBrowser = {
-        // getFetchData: async function (url) {
         getFetchData: function (url) {
-          // const requestOptions = {
-          //   method,
-          //   headers: {
-          //     "Content-Type": "application/json",
-          //     Authorization: `Bearer ${accessToken}`, // accessToken을 "Authorization" 헤더에 넣음
-          //     refresh: `${refreshToken}`, // refresh 토큰을 헤더에 넣음
-          //   },
-          //   body: method === "POST" ? JSON.stringify(data) : undefined,
-          //   withCredentials: true,
-          // };
-
           try {
-            // const response = await fetch(url);
-            // const responseData = await response.json();
+            var response = fetch(url)
+            // .then(function (response) {
+            //   if (!response.ok) {
+            //     console.log(response);
+            //     throw new Error('Network response was not ok + 에러')
+            //   }
 
-            var response = fetch(url);
-            var responseData = response.json();
-            console.log(responseData);
+            //   return response.json();
+            // })
+
+            .then(function (response) {
+              return response.json()
+            })
+
+            .then(function (data) {
+              if(data.code === 404){
+                console.log('ㅇㅇ 실화');
+              }
+
+              if(data.code === 200){
+                console.log('ㅇㅇ 200에러 실화');
+              }
+
+              console.log(data);
+              console.log(data.status);
+            })
           } catch (error) {
             console.log(error);
           }
@@ -38,16 +46,18 @@
           $.ajax({
             method: "get",
             url: url,
-            dataType: "json",
-            success: function (response) {
-              // console.log("data : : " + JSON.stringify(data));
-              console.log(response);
-            },
-            error: function () {
-              console.log('error');
+            dataType: "json"
+          })
+          
+          .done(function (data) {
+            if(data.resultCode === '000'){
+              console.log(data);
             }
-       
-          });
+          })
+          
+          .fail(function (data) {
+            console.log(data);
+          })
         },
 
         getAjaxHandling: function () {
@@ -56,22 +66,20 @@
       };
 
       var agent = window.navigator.userAgent.toLowerCase();
+      var ieName = navigator.appName
+
+      if(ieName === "Microsoft Internet Explorer"){
+        isBrowser.getAjaxHandling();
+      }
+
       if (agent.indexOf("chrome") > -1) {
-        isBrowser.getFetchData(
-          "https://jsonplaceholder.typicode.com/posts/1/comments"
-        );
+        isBrowser.getFetchData("https://jsonplaceholder.typicode.com/posts/1/comments");
         console.log("패치");
       }
 
-      if (agent.indexOf("trident") > -1) {
-        isBrowser.getAjaxData(
-          "https://jsonplaceholder.typicode.com/posts/1/comments"
-        );
+      if (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1 ) {
+        isBrowser.getAjaxData("https://jsonplaceholder.typicode.com/posts/1/comments");
         console.log("아작스");
-      }
-      //
-      else if (agent.indexOf("MSIE") !== -1) {
-        isBrowser.getAjaxHandling();
       }
     </script>
   </body>
