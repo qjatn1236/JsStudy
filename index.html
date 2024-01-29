@@ -12,31 +12,30 @@
         getFetchData: function (url) {
           try {
             var response = fetch(url)
-            // .then(function (response) {
-            //   if (!response.ok) {
-            //     console.log(response);
-            //     throw new Error('Network response was not ok + 에러')
-            //   }
+              // .then(function (response) {
+              //   if (!response.ok) {
+              //     console.log(response);
+              //     throw new Error('Network response was not ok + 에러')
+              //   }
 
-            //   return response.json();
-            // })
+              //   return response.json();
+              // })
 
-            .then(function (response) {
-              return response.json()
-            })
+              .then(function (response) {
+                return response.json();
+              })
 
-            .then(function (data) {
-              if(data.code === 404){
-                console.log('ㅇㅇ 실화');
-              }
+              .then(function (data) {
+                if (data.code === 404) {
+                  console.log("ㅇㅇ 실화");
+                }
 
-              if(data.code === 200){
-                console.log('ㅇㅇ 200에러 실화');
-              }
+                if (data.code === 200) {
+                  console.log("ㅇㅇ 200에러 실화");
+                }
 
-              console.log(data);
-              console.log(data.status);
-            })
+                console.log(data);
+              });
           } catch (error) {
             console.log(error);
           }
@@ -46,41 +45,73 @@
           $.ajax({
             method: "get",
             url: url,
-            dataType: "json"
+            dataType: "json",
           })
-          
-          .done(function (data) {
-            if(data.resultCode === '000'){
-              console.log(data);
-            }
-          })
-          
-          .fail(function (data) {
-            console.log(data);
-          })
+
+            .done(function (data) {
+              if (data.resultCode === "000") {
+                console.log(data);
+              }
+            })
+
+            .fail(function (error) {
+              console.log(error);
+            });
         },
 
         getAjaxHandling: function () {
-          alert('익스10 이하는 컴터를 바꿔줘')
-        }
+          alert("익스10 이하는 컴터를 바꿔줘");
+        },
       };
 
       var agent = window.navigator.userAgent.toLowerCase();
-      var ieName = navigator.appName
+      var ieName = navigator.appName;
 
-      if(ieName === "Microsoft Internet Explorer"){
+      if (ieName === "Microsoft Internet Explorer") {
         isBrowser.getAjaxHandling();
       }
 
       if (agent.indexOf("chrome") > -1) {
-        isBrowser.getFetchData("https://jsonplaceholder.typicode.com/posts/1/comments");
+        isBrowser.getFetchData(
+          "https://jsonplaceholder.typicode.com/posts/1/comments"
+        );
         console.log("패치");
       }
 
-      if (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1 ) {
-        isBrowser.getAjaxData("https://jsonplaceholder.typicode.com/posts/1/comments");
+      if (
+        navigator.appName == "Netscape" &&
+        navigator.userAgent.search("Trident") != -1
+      ) {
+        isBrowser.getAjaxData(
+          "https://jsonplaceholder.typicode.com/posts/1/comments"
+        );
         console.log("아작스");
       }
+
+      var getFetchData = {
+        isOs: "ie",
+        isAjaxType: "ajax",
+
+        init: function () {
+          this.isOs = this.isBrowser();
+          this.isAjaxType = this.isOs == "ie" ? "" : "";
+        },
+
+        isBrowser: function () {
+          var agent = window.navigator.userAgent.toLowerCase();
+          var ieName = navigator.appName;
+
+          if (ieName === "Microsoft Internet Explorer") {
+            isBrowser.getAjaxHandling();
+          }
+        },
+
+        getFetch: function () {
+          $.ajax();
+        },
+      };
+
+      var json = getFetchData.getFetch(param);
     </script>
   </body>
 </html>
