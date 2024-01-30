@@ -8,110 +8,49 @@
   <body>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
-      var isBrowser = {
-        getFetchData: function (url) {
-          try {
-            var response = fetch(url)
-              // .then(function (response) {
-              //   if (!response.ok) {
-              //     console.log(response);
-              //     throw new Error('Network response was not ok + 에러')
-              //   }
-
-              //   return response.json();
-              // })
-
-              .then(function (response) {
-                return response.json();
-              })
-
-              .then(function (data) {
-                if (data.code === 404) {
-                  console.log("ㅇㅇ 실화");
-                }
-
-                if (data.code === 200) {
-                  console.log("ㅇㅇ 200에러 실화");
-                }
-
-                console.log(data);
-              });
-          } catch (error) {
-            console.log(error);
-          }
-        },
-
-        getAjaxData: function (url) {
-          $.ajax({
-            method: "get",
-            url: url,
-            dataType: "json",
-          })
-
-            .done(function (data) {
-              if (data.resultCode === "000") {
-                console.log(data);
-              }
-            })
-
-            .fail(function (error) {
-              console.log(error);
-            });
-        },
-
-        getAjaxHandling: function () {
-          alert("익스10 이하는 컴터를 바꿔줘");
-        },
-      };
-
-      var agent = window.navigator.userAgent.toLowerCase();
-      var ieName = navigator.appName;
-
-      if (ieName === "Microsoft Internet Explorer") {
-        isBrowser.getAjaxHandling();
-      }
-
-      if (agent.indexOf("chrome") > -1) {
-        isBrowser.getFetchData(
-          "https://jsonplaceholder.typicode.com/posts/1/comments"
-        );
-        console.log("패치");
-      }
-
-      if (
-        navigator.appName == "Netscape" &&
-        navigator.userAgent.search("Trident") != -1
-      ) {
-        isBrowser.getAjaxData(
-          "https://jsonplaceholder.typicode.com/posts/1/comments"
-        );
-        console.log("아작스");
-      }
-
       var getFetchData = {
-        isOs: "ie",
-        isAjaxType: "ajax",
+        isOs: "",
+        isDataType: "",
 
         init: function () {
           this.isOs = this.isBrowser();
-          this.isAjaxType = this.isOs == "ie" ? "" : "";
+          this.isDataType = "";
+
+          if (this.isOs === 'chrome') {
+            this.isDataType = "fetch"
+          }
+
+          // this.isOs == "chrome" ? console.log(this.isOs) : console.log(this.isOs);
+          console.log("브라우저는 " + this.isOs);
+          console.log("사용해야할 데이터 통신은 " + this.isDataType);
         },
 
         isBrowser: function () {
           var agent = window.navigator.userAgent.toLowerCase();
           var ieName = navigator.appName;
+          
+          if (agent.indexOf("chrome") > -1) {
+            console.log("크롬");
+            return "chrome";
+          }
+
+          if (navigator.appName == "Netscape" && navigator.userAgent.search("Trident") != -1) {
+            console.log(navigator.appName);
+            return "edge"
+          }
 
           if (ieName === "Microsoft Internet Explorer") {
-            isBrowser.getAjaxHandling();
+            console.log(ieName);
+            return "ie"
           }
         },
 
-        getFetch: function (param) {
-          $.ajax(param);
-        },
-      };
+        getFetch: function () {
+          this.init();
+        }
+      }
 
-      // var json = getFetchData.getFetch(param);
+      var json = getFetchData.getFetch();
     </script>
   </body>
 </html>
