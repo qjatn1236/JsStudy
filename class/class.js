@@ -1,7 +1,7 @@
 var getFetchData = {
     isOs: "",
     isDataType: "",
-
+    _this : this,
     init: function () {
       this.isOs = this.isBrowser();
       
@@ -33,8 +33,19 @@ var getFetchData = {
       }
     },
 
+    realFetch : function(){
+
+    },
     getFetch: function () {
-      this.init();
+        
+      //this.init();
+      if ( this.isDataType == 'fetch'){
+        this.realFetch(param , _this);
+
+        _this.isBrowser
+      }else{
+
+      }
     }
   }
 
