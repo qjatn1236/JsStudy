@@ -33,18 +33,23 @@ var getFetchData = {
       }
     },
 
-    realFetch : function(){
-
+    runFetch : function(){
+      fetch('https://jsonplaceholder.typicode.com/posts/1')
+      .then((response) => response.json())
+      .then((data) => console.log(data))
     },
+
+    runAjax : function () {
+      console.log('아작스');
+    },
+
     getFetch: function () {
-        
-      //this.init();
       if ( this.isDataType == 'fetch'){
-        this.realFetch(param , _this);
-
-        _this.isBrowser
+        this.runFetch();
+        // this.runFetch(param , _this);
+        // _this.isBrowser
       }else{
-
+        this.runAjax();
       }
     }
   }
