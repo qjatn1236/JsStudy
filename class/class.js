@@ -2,6 +2,7 @@ var getFetchData = {
   isOs: "",
   isDataType: "",
   _this: this,
+
   init: function () {
     this.isOs = this.isBrowser();
 
@@ -22,10 +23,7 @@ var getFetchData = {
       return "chrome";
     }
 
-    if (
-      navigator.appName == "Netscape" &&
-      navigator.userAgent.search("Trident") != -1
-    ) {
+    if (navigator.appName == "Netscape" && navigator.userAgent.search("Trident") != -1) {
       this.isDataType = "ajax";
       return "edge";
     }
