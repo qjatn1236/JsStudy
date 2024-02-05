@@ -14,7 +14,11 @@ const clsWord = {
 
     // 위에 만들어둔 단어 배열을 돌면서 문장으로 합침
     for (let i = 0; i < getContentsValue.length; i++) {
-      fullText += ` ${getContentsValue[i]}`;
+      fullText += `${getContentsValue[i]}`;
+
+      if (i != getContentsValue - 1) {
+        fullText += " ";
+      }
     }
 
     // 합친 단어를 결과 영역에 뿌려줌
@@ -35,16 +39,16 @@ const clsWord = {
     }
   },
 
-  changeSelcet: function (e) {
+  changeSelect: function (e) {
     // 선택한 셀렉트의 value 조회
     let selectNum = e.target.value;
-
-    // 변경된 텍스트가 있는 클래스로 조회
-    const findedList = document.querySelectorAll(".textEmphasize");
+    
+    // 변경된 텍스트들 모두 조회
+    const emphasizedTexts = document.querySelectorAll(".textEmphasize");
 
     // 조회한 셀렉트 옵션을 돌면서 찾은 셀렉트의 value와 같을 경우 색상을 변경
-    for (let i = 0; i < findedList.length; i++) {
-      i == selectNum ? (findedList[i].style.color = "blue") : (findedList[i].style.color = "red");
+    for (let i = 0; i < emphasizedTexts.length; i++) {
+      emphasizedTexts[i].style.color = i == selectNum ? "blue" : "red"
     }
   },
 };
@@ -55,5 +59,5 @@ document.querySelector(".goFindText").addEventListener("click", () => {
 });
 
 document.querySelector(".selectList").addEventListener("change", (e) => {
-  clsWord.changeSelcet(e);
+  clsWord.changeSelect(e);
 });
