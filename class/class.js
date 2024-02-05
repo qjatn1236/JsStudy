@@ -23,7 +23,10 @@ var getFetchData = {
       return "chrome";
     }
 
-    if (navigator.appName == "Netscape" && navigator.userAgent.search("Trident") != -1) {
+    if (
+      navigator.appName == "Netscape" &&
+      navigator.userAgent.search("Trident") != -1
+    ) {
       this.isDataType = "ajax";
       return "edge";
     }
@@ -36,8 +39,16 @@ var getFetchData = {
 
   runFetch: function () {
     fetch("https://jsonplaceholder.typicode.com/posts/1")
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Network response was not ok`);
+      }
+      return response.json();
+    })
+    
+    .catch(error => {
+      console.error('Error:', error)
+    })
   },
 
   runAjax: function () {
@@ -54,5 +65,3 @@ var getFetchData = {
     }
   },
 };
-
-//   var json = getFetchData.getFetch();
