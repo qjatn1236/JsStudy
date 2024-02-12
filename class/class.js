@@ -53,10 +53,9 @@ var getFetchData = {
   },
 
   getFetch: function () {
-    if (this.isDataType == "fetch") {
+    if (this.isDataType === "fetch") {
+      console.log(this._this);
       this.runFetch();
-      // this.runFetch(param , _this);
-      // _this.isBrowser
     } else {
       this.runAjax();
     }
