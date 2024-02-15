@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>문자 치환 예제</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="userInput">
+        <input type="text" class="inputMaxNumber" placeholder="구매 가능한 최대 수량을 선택해 주세요." oninput="onlyNumbers(event)" />
+        <button type="button" class="setMaxNumberButton">구매수량 적용</button>
+      </div>
+      <div class="moneyDiv">
+        <p class="amount1"></p>
+        <span>원</span>
+        <button type="button" class="setAmount1Plus" onclick="setAmount(5000)">+</button>
+        <button type="button" class="setAmount1Minus" onclick="subtractAmount(5000)">-</button>
+        <!-- 사용자가 입력한 max 값으로 동적 변경 -->
+        <button type="button" class="setAmount1MaxNumber setMaxNum" onclick="setMaxAmount(5000)"></button>
+      </div>
+      <div class="moneyDiv">
+        <p class="amount2"></p>
+        <span>원</span>
+        <button type="button" class="setAmount2Plus" onclick="setAmount(10000)">+</button>
+        <button type="button" class="setAmount2Minus" onclick="subtractAmount(10000)">-</button>
+        <!-- 사용자가 입력한 max 값으로 동적 변경 -->
+        <button type="button" class="setAmount2MaxNumber setMaxNum" onclick="setMaxAmount(10000)"></button>
+      </div>
+      <div class="moneyDiv">
+        <p class="amount3"></p>
+        <span>원</span>
+        <button type="button" class="setAmount3Plus" onclick="setAmount(50000)">+</button>
+        <button type="button" class="setAmount3Minus" onclick="subtractAmount(50000)">-</button>
+        <!-- 사용자가 입력한 max 값으로 동적 변경 -->
+        <button type="button" class="setAmount3MaxNumber setMaxNum" onclick="setMaxAmount(50000)"></button>
+      </div>
+      <div class="moneyDiv">
+        <p class="amountTotal">총 가격</p>
+        <p class="amountResult">0</p>
+        <p class="">원</p>
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./index.js"></script>
+  </body>
+</html>

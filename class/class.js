@@ -23,32 +23,35 @@ var getFetchData = {
       return "chrome";
     }
 
-    if (
-      navigator.appName == "Netscape" &&
-      navigator.userAgent.search("Trident") != -1
-    ) {
+    if (navigator.appName == "Netscape" && navigator.userAgent.search("Trident") != -1) {
       this.isDataType = "ajax";
       return "edge";
     }
 
     if (ieName === "Microsoft Internet Explorer") {
-      console.log(ieName);
+      alert("IE는 지원하지 않습니다.");
       return "ie";
     }
   },
 
-  runFetch: function () {
-    fetch("https://jsonplaceholder.typicode.com/posts/1")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Network response was not ok`);
-      }
-      return response.json();
-    })
-    
-    .catch(error => {
-      console.error('Error:', error)
-    })
+  runFetch: function (url) {
+    return fetch(url)
+      .then(function (response) {
+        console.log(response);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+
+      .then(function (data) {
+        return data;
+      })
+
+      .catch(function (error) {
+        console.error("Error:", error);
+        throw error;
+      });
   },
 
   runAjax: function () {
@@ -57,9 +60,9 @@ var getFetchData = {
 
   getFetch: function () {
     if (this.isDataType == "fetch") {
-      this.runFetch();
       // this.runFetch(param , _this);
       // _this.isBrowser
+      this.runFetch("https://jsonplaceholder.typicode.com/posts/1");
     } else {
       this.runAjax();
     }
