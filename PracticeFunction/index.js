@@ -1,16 +1,32 @@
 // 초기에 금액 셋팅
-(function () {
-  const arrAmount = [5000, 10000, 50000];
+let Practice = {
+  init: function () {
+    // 초기화
+  },
 
-  arrAmount.forEach((e, i) => {
-    // items에 arrAmount 배열에있는 금액을 담아줄 Element선택
-    const items = document.querySelector(`.amount${i + 1}`);
-    // 금액에 콤마 추가
-    const itemsDot = e.toLocaleString();
-    // 콤마 추가된 금액 담아주기
-    items.textContent = itemsDot;
-  });
-})();
+  setPriceItems: function (...arg) {
+    arg.forEach((e, i) => {
+      document.querySelector(".moneyDivBox").innerHTML += `
+        <div class="moneyDiv">
+          <p class="amount amount${i + 1}"></p>
+          <span>원</span>
+          <button type="button" class="setAmount${i + 1}Plus" onclick="setAmount(this)">+</button>
+          <button type="button" class="setAmount${i + 1}Minus" onclick="setAmount(this)">-</button>
+          <button type="button" class="setAmount${i + 1}MaxNumber setMaxNum" onclick="setMaxAmount(${e})"></button>
+        </div>
+      `;
+
+      // items에 arrAmount 배열에있는 금액을 담아줄 Element선택
+      const items = document.querySelector(`.amount${i + 1}`);
+      // 금액에 콤마 추가
+      const itemsDot = e.toLocaleString();
+      console.log(itemsDot);
+
+      // 콤마 추가된 금액 담아주기
+      items.textContent = itemsDot;
+    });
+  },
+};
 
 // 금액 추가
 function setAmount(event) {

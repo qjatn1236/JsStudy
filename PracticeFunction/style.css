@@ -10,9 +10,8 @@
 .inputMaxNumber {
   width: 30vw;
 }
-.setAmount1MaxNumber,
-.setAmount2MaxNumber,
-.setAmount3MaxNumber {
+
+.setMaxNum {
   display: none;
   width: 40px;
 }
