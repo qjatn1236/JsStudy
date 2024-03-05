@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paging</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="listBox"></div>
+
+    <div class="pagenation">
+      <a href="javascript:void(0);" id="firstButton" class="pagenation_btn" data-page="1">
+        <img src="./images/pagenation_first.svg" alt="페이지 넘기는 버튼" />
+      </a>
+      <a href="javascript:void(0);" id="prevButton" class="pagenation_btn" data-page="1">
+        <img src="./images/pagenation_prev.svg" alt="페이지 넘기는 버튼" />
+      </a>
+      <div class="page_num_box">
+        <a href="javascript:void(0)" class="page_num active" data-page="1">1</a>
+        <a href="javascript:void(0)" class="page_num" data-page="2">2</a>
+        <a href="javascript:void(0)" class="page_num" data-page="3">3</a>
+        <a href="javascript:void(0)" class="page_num" data-page="4">4</a>
+        <a href="javascript:void(0)" class="page_num" data-page="5">5</a>
+      </div>
+      <a href="javascript:void(0);" id="nextButton" class="pagenation_btn" data-page="2">
+        <img src="./images/pagenation_next.svg" alt="페이지 넘기는 버튼" />
+      </a>
+      <a href="javascript:void(0);" id="lastButton" class="pagenation_btn" data-page="6">
+        <img src="./images/pagenation_last.svg" alt="페이지 넘기는 버튼" />
+      </a>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
