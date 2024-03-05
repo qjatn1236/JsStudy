@@ -1,0 +1,40 @@
+.pagenation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagenation .page_num_box {
+  display: flex;
+  padding: 0 16px;
+}
+
+.pagenation a {
+  font-size: 14px;
+  font-weight: 600;
+  color: #bdbdbd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  letter-spacing: -0.28px;
+  text-align: center;
+}
+
+.pagenation a.active {
+  color: #000;
+}
+
+.pagenation a:last-child {
+  margin-right: 0;
+}
+
+.pagenation a#prevButton {
+  margin-right: 0;
+}
+
+.pagenation .last {
+  margin-left: 8px;
+}
