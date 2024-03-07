@@ -1,6 +1,5 @@
 const apiUrl = "https://dummyjson.com/products?limit=5&&skip=0&select=title,price";
 const nowUrl = new URL(apiUrl);
-const VIEW_ITEM_COUNT = 5;
 
 try {
   fetch(apiUrl)
@@ -12,6 +11,8 @@ try {
     })
 
     .then((data) => {
+      console.log(data);
+      console.log(data.total / 5);
       const itemBox = document.querySelector(".listBox");
 
       data.products.forEach((elements) => {
@@ -29,7 +30,7 @@ try {
 // pageNumbers.forEach((pageNumber) => {
 //   pageNumber.addEventListener("click", () => {
 //     const clickedPage = pageNumber.getAttribute("data-page");
-//     const wantPageNum = (clickedPage - 1) * VIEW_ITEM_COUNT;
+//     const wantPageNum = (clickedPage - 1) * 5;
 
 //     nowUrl.searchParams.set("skip", wantPageNum);
 
