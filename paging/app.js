@@ -13,7 +13,7 @@ try {
 
     .then((data) => {
       // pageNumBox.innerHTML += ``;
-      const currentPage = 1; // 현재 페이지
+      const currentPage = 6; // 현재 페이지
       const pageCount = data.limit; // 한페이지에 보여줄 게시물
 
       let pageGroup = Math.ceil(currentPage / pageCount); // 현재페이지의 그룹 ex) 1~5 = 1 , 6~10 = 2, 11~15 = 3
@@ -30,7 +30,11 @@ try {
 
       // let prev = ;
       // console.log(prev);
-
+      // const pagingBox = document.querySelector(".pagenation");
+      // pagingBox.innerHTML += `<a href="javascript:void(0);" id="prevButton" class="pagenation_btn">
+      //                           <img src="./images/pagenation_prev.svg" alt="페이지 넘기는 버튼" /> 
+      //                         </a>`
+      
       let next = lastNumber + 1;
       console.log(next);
 

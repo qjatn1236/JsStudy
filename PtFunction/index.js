@@ -58,18 +58,18 @@ fetch("./study.json")
 // }
 
 // 구매수량 적용뒤 금액 추가
-function setMaxAmount(priceCount, max, min, moneyItem) {
-  let nowTotalPrice = document.querySelector(".amountResult").textContent;
+// function setMaxAmount(priceCount, max, min, moneyItem) {
+//   let nowTotalPrice = document.querySelector(".amountResult").textContent;
 
-  let nowTotalAmountNumber = parseFloat(nowTotalPrice.replace(/,/g, ""));
-  nowTotalAmountNumber += priceCount * moneyItem;
+//   let nowTotalAmountNumber = parseFloat(nowTotalPrice.replace(/,/g, ""));
+//   nowTotalAmountNumber += priceCount * moneyItem;
 
-  console.log(nowTotalAmountNumber);
-  if (nowTotalAmountNumber > max || nowTotalAmountNumber < -min) {
-    alert("부적절한 조건입니다.");
-    return;
-  }
+//   console.log(nowTotalAmountNumber);
+//   if (nowTotalAmountNumber > max || nowTotalAmountNumber < -min) {
+//     alert("부적절한 조건입니다.");
+//     return;
+//   }
 
-  let result = nowTotalAmountNumber.toLocaleString();
-  document.querySelector(".amountResult").textContent = result;
-}
+//   let result = nowTotalAmountNumber.toLocaleString();
+//   document.querySelector(".amountResult").textContent = result;
+// }
