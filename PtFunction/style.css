@@ -1,8 +1,8 @@
 .moneyDiv {
   display: flex;
-  flex-direction: row;
-  align-items: center;
   gap: 10px;
+  align-items: center;
+  flex-direction: row;
 }
 .userInput > * {
   height: 3vh;
@@ -12,7 +12,6 @@
 }
 
 .setMaxNum {
-  display: none;
   width: 40px;
 }
 
