@@ -9,7 +9,7 @@ class studyClass {
     try {
       const response = await fetch(apiUrl);
       if (!response.ok) {
-        throw new Error('error');
+        throw new Error("error");
       }
       const data = await response.json();
 
@@ -32,7 +32,9 @@ class studyClass {
             <span>원</span>
             <button type="button" class="setAmount${i + 1}Plus" onclick="classPtMoneyClass.setAmountClass(this, ${this.maxMoney}, ${this.minMoney})">+</button>
             <button type="button" class="setAmount${i + 1}Minus" onclick="classPtMoneyClass.setAmountClass(this, ${this.maxMoney}, ${this.minMoney})">-</button>
-            <button type="button" class="setAmount${i + 1}MaxNumber setMaxNum" onclick="classPtMoneyClass.setMaxAmountClass(${maxNumber}, ${this.maxMoney}, ${this.minMoney}, ${e})">${maxNumber}</button>
+            <button type="button" class="setAmount${i + 1}MaxNumber setMaxNum" onclick="classPtMoneyClass.setMaxAmountClass(${maxNumber}, ${this.maxMoney}, ${
+        this.minMoney
+      }, ${e})">${maxNumber}</button>
           </div>
         `;
       // items에 arrAmount 배열에 있는 금액을 담아줄 Element 선택
@@ -82,12 +84,12 @@ class studyClass {
     let nowTotalAmountNumber = parseFloat(nowTotalPrice.replace(/,/g, ""));
 
     nowTotalAmountNumber += priceCount * moneyItem;
-  
+
     if (nowTotalAmountNumber > max || nowTotalAmountNumber < -min) {
       alert("부적절한 조건입니다.");
       return;
     }
-  
+
     let result = nowTotalAmountNumber.toLocaleString();
     document.querySelector(".amountResult").textContent = result;
   }
