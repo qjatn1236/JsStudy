@@ -1,0 +1,46 @@
+{
+  "code": 100,
+  "msg": "success",
+  "data": {
+    "list_data": [
+      {
+        "title": "🚘티키타카 EP.7 조향SW설계셀"
+      },
+      {
+        "title": "🚘티키타카 EP.6 ESG기획팀"
+      },
+      {
+        "title": "[M.PEOPLE] Andrea Mezzabotta | Brakes Engineer"
+      },
+      {
+        "title": "[임직원 서평] &lt;그럭저럭 살고 싶지 않다면 당신이 옳은 겁니다&gt; 완벽주의자를 위한 책"
+      },
+      {
+        "title": "[임직원 서평] &lt;있는 그대로 인도&gt; 우리가 인도와 친해져야 하는 이유"
+      },
+      {
+        "title": "모비스의 미래 먹거리? 우리가 책임진다!! | 므브스뉴스 EP.29"
+      },
+      {
+        "title": "🚘티키타카 EP.5 서비스부품물류팀"
+      },
+      {
+        "title": "[M.PEOPLE] Michael Thon | Algorithm Expert"
+      },
+      {
+        "title": "MOBIS Ventures Silicon Valley"
+      },
+      {
+        "title": "현대모비스 브랜드 매니페스토 필름 비하인드 스토리"
+      },
+      {
+        "title": "Introducing MOBIS Technical Center in Europe"
+      },
+      {
+        "title": "🚘티키타카 EP.4 배터리생기실 배터리생기팀"
+      }
+    ]
+  },
+  "total_page": 27,
+  "total": 318
+}

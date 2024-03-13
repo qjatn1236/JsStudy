@@ -32,9 +32,7 @@ class studyClass {
             <span>원</span>
             <button type="button" class="setAmount${i + 1}Plus" onclick="classPtMoneyClass.setAmountClass(this, ${this.maxMoney}, ${this.minMoney})">+</button>
             <button type="button" class="setAmount${i + 1}Minus" onclick="classPtMoneyClass.setAmountClass(this, ${this.maxMoney}, ${this.minMoney})">-</button>
-            <button type="button" class="setAmount${i + 1}MaxNumber setMaxNum" onclick="classPtMoneyClass.setMaxAmountClass(${maxNumber}, ${this.maxMoney}, ${
-        this.minMoney
-      }, ${e})">${maxNumber}</button>
+            <button type="button" class="setAmount${i + 1}MaxNumber setMaxNum" onclick="classPtMoneyClass.setMaxAmountClass(${maxNumber}, ${this.maxMoney}, ${this.minMoney}, ${e})">${maxNumber}</button>
           </div>
         `;
       // items에 arrAmount 배열에 있는 금액을 담아줄 Element 선택
