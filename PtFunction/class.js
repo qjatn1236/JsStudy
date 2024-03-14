@@ -32,7 +32,9 @@ class studyClass {
             <span>원</span>
             <button type="button" class="setAmount${i + 1}Plus" onclick="classPtMoneyClass.setAmountClass(this, ${this.maxMoney}, ${this.minMoney})">+</button>
             <button type="button" class="setAmount${i + 1}Minus" onclick="classPtMoneyClass.setAmountClass(this, ${this.maxMoney}, ${this.minMoney})">-</button>
-            <button type="button" class="setAmount${i + 1}MaxNumber setMaxNum" onclick="classPtMoneyClass.setMaxAmountClass(${maxNumber}, ${this.maxMoney}, ${this.minMoney}, ${e})">${maxNumber}</button>
+            <button type="button" class="setAmount${i + 1}MaxNumber setMaxNum" onclick="classPtMoneyClass.setMaxAmountClass(${maxNumber}, ${this.maxMoney}, ${
+        this.minMoney
+      }, ${e})">${maxNumber}</button>
           </div>
         `;
       // items에 arrAmount 배열에 있는 금액을 담아줄 Element 선택
@@ -49,23 +51,27 @@ class studyClass {
   setAmountClass(event, max, min) {
     // 초기에 설정된 금액 담아줄 그릇
     const price = event.parentElement.firstElementChild.textContent;
+
     // 그릇에서 콤마 제거
     let priceDot = parseFloat(price.replace(/,/g, ""));
 
     // 현재 토탈 금액 담아줄 그릇
     const nowTotalPrice = document.querySelector(".amountResult").textContent;
-    // 클릭한 요소가 +인지 -인지 체크
-    const getClickPlusElement = event.classList[0].includes("Plus");
-    const getClickMinusElement = event.classList[0].includes("Minus");
 
     // 콤마 제거
     let nowTotalAmountNumber = parseFloat(nowTotalPrice.replace(/,/g, ""));
 
-    if (getClickPlusElement) {
-      nowTotalAmountNumber += priceDot;
-    } else if (getClickMinusElement) {
-      nowTotalAmountNumber -= priceDot;
-    }
+    // 클릭한 요소가 +인지 -인지 체크
+    event.classList[0].includes("Plus") ? (nowTotalAmountNumber += priceDot) : (nowTotalAmountNumber -= priceDot);
+    
+    // const getClickPlusElement = event.classList[0].includes("Plus");
+    // const getClickMinusElement = event.classList[0].includes("Minus");
+
+    // if (getClickPlusElement) {
+    //   nowTotalAmountNumber += priceDot;
+    // } else if (getClickMinusElement) {
+    //   nowTotalAmountNumber -= priceDot;
+    // }
 
     if (nowTotalAmountNumber > max || nowTotalAmountNumber < -min) {
       alert("부적절한 조건입니다.");
