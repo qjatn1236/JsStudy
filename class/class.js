@@ -23,6 +23,7 @@ var getFetchData = {
       this.isDataType = "fetch";
       return "edge";
     }
+
     if (agent.indexOf("edg/") > -1) {
       // 크롬기반 엣지
       this.isDataType = "fetch";
@@ -65,10 +66,10 @@ var getFetchData = {
     }
   },
   
-  runAjax: async function () {
+  runAjax: async function (url) {
     try {
       const response = await $.ajax({
-        url: 'https://jsonplaceholder.typicode.com/posts/1',
+        url: url,
         method: 'GET',
         dataType: 'json'
       });
