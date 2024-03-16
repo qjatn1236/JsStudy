@@ -1,7 +1,6 @@
 var getFetchData = {
   isOs: "",
   isDataType: "",
-  _this: this,
 
   init: function () {
     this.isOs = this.isBrowser();
@@ -11,21 +10,39 @@ var getFetchData = {
     }
 
     console.log("브라우저는 " + this.isOs);
-    console.log("사용해야할 데이터 통신은 " + this.isDataType);
+    console.log("사용할 데이터 통신은 " + this.isDataType);
   },
 
   isBrowser: function () {
     var agent = window.navigator.userAgent.toLowerCase();
     var ieName = navigator.appName;
+    console.log(agent);
+    
+    if (agent.indexOf("edge") > -1) {
+      // MS 엣지
+      this.isDataType = "fetch";
+      return "edge";
+    }
+    if (agent.indexOf("edg/") > -1) {
+      // 크롬기반 엣지
+      this.isDataType = "fetch";
+      console.log("크롬기반 엣지");
+      return "edge";
+    }
 
     if (agent.indexOf("chrome") > -1) {
       this.isDataType = "fetch";
       return "chrome";
     }
 
-    if (navigator.appName == "Netscape" && navigator.userAgent.search("Trident") != -1) {
-      this.isDataType = "ajax";
-      return "edge";
+    if (agent.indexOf("safari") > -1) {
+      this.isDataType = "fetch";
+      return "safari";
+    }
+
+    if (agent.indexOf("firefox") > -1) {
+      this.isDataType = "fetch";
+      return "firefox";
     }
 
     if (ieName === "Microsoft Internet Explorer") {
@@ -34,37 +51,35 @@ var getFetchData = {
     }
   },
 
-  runFetch: function (url) {
-    return fetch(url)
-      .then(function (response) {
-        console.log(response);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
+  runFetch: async function (url) {
+    try {
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-      .then(function (data) {
-        return data;
-      })
-
-      .catch(function (error) {
-        console.error("Error:", error);
-        throw error;
-      });
-  },
-
-  runAjax: function () {
-    console.log("아작스");
-  },
-
-  getFetch: function () {
-    if (this.isDataType == "fetch") {
-      // this.runFetch(param , _this);
-      // _this.isBrowser
-      this.runFetch("https://jsonplaceholder.typicode.com/posts/1");
-    } else {
-      this.runAjax();
+      const data = await response.json()
+      console.log(data);
+    } catch (error) {
+      console.log(error);
     }
+  },
+  
+  runAjax: async function () {
+    try {
+      const response = await $.ajax({
+        url: 'https://jsonplaceholder.typicode.com/posts/1',
+        method: 'GET',
+        dataType: 'json'
+      });
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    }
+  },
+
+  getData: function (url) {
+    this.isDataType == "fetch" ? this.runFetch(url) : this.runAjax(url)
   },
 };
