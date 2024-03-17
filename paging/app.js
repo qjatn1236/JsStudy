@@ -1,4 +1,20 @@
-const apiUrl = "./page.json";
+// const apiUrl = `https://dummyjson.com/products?limit=5&&skip=${(getPageNum - 1) * 5}&select=title,price`;
+const apiUrl = `https://dummyjson.com/products?limit=5&&skip=0&select=title,price`;
+
+function goToPage(getPageNum){
+
+  const setUrl = new URL(apiUrl);
+  const searchParams = new URLSearchParams(setUrl.search);
+
+  searchParams.set('skip', getPageNum);
+  setUrl.search = searchParams.toString();
+  console.log(setUrl.toString());
+}
+
+function getPageNumber(event) {
+  let getPageNum = event.target.dataset.page
+  goToPage(getPageNum)
+}
 
 const pageNumBox = document.querySelector(".page_num_box");
 try {
@@ -11,7 +27,7 @@ try {
     })
 
     .then((data) => {
-      const currentPage = 2; // 현재 페이지
+      const currentPage = 1; // 현재 페이지
       console.log(currentPage + " 현재 페이지");
 
       const pageCount = data.limit; // 한페이지에 보여줄 게시물
@@ -48,29 +64,19 @@ try {
       }
 
       for (let i = 1; i <= pageCount; i++) {
-        // pageNumBox.innerHTML += `<a href="javascript:void(0)" class="page_num active" data-page="1">${i}</a>`;
-        pageNumBox.innerHTML += `<a href="javascript:void(0)" class="page_num" data-page=${i}>${i}</a>`;
+        pageNumBox.innerHTML += `<a href="javascript:void(0)" onclick="getPageNumber(event)" class="page_num" data-page=${i}>${i}</a>`;
       }
 
       const itemBox = document.querySelector(".listBox");
 
-      for (let i = 1; i <= data.limit; i++) {
+      for (let i = 0; i < data.limit; i++) {
         const addDivBox = document.createElement("div");
-
+        
         addDivBox.textContent = data.products[i].title;
         itemBox.appendChild(addDivBox);
       }
-      // data.products.forEach((elements) => {
-      //   const addDivBox = document.createElement("div");
 
-      //   addDivBox.textContent = elements.title;
-      //   itemBox.appendChild(addDivBox);
-      // });
     });
 } catch (error) {
-  console.log(["에러 발생"] + error);
-}
-
-function getTotalPageCount(data) {
-  return Math.ceil(data.total / data.limit);
+  console.log(error);
 }
