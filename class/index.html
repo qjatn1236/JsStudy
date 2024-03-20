@@ -11,8 +11,11 @@
     <script src="./class.js"></script>
 
     <script>
-      const setInit = getFetchData.init()
-      const goFetch = getFetchData.getData("https://jsonplaceholder.typicode.com/posts/1");
+      // const setInit = getFetchData.init();
+      // const goFetch = getFetchData.getData("https://jsonplaceholder.typicode.com/posts/1");
+
+      const BROWSER = new BrowserHandler();
+      BROWSER.getBrowser();
     </script>
   </body>
 </html>

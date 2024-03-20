@@ -1,22 +1,39 @@
-// const apiUrl = `https://dummyjson.com/products?limit=5&&skip=${(getPageNum - 1) * 5}&select=title,price`;
-const apiUrl = `https://dummyjson.com/products?limit=5&&skip=0&select=title,price`;
+const apiUrl = `https://dummyjson.com/products?limit=5&skip=0&select=title,price`;
 
-function goToPage(getPageNum){
+function goToPage(getPageNum) {
+  const goApiUrl = `https://dummyjson.com/products?limit=5&skip=${getPageNum}&select=title,price`;
 
-  const setUrl = new URL(apiUrl);
-  const searchParams = new URLSearchParams(setUrl.search);
+  fetch(goApiUrl)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data.products);
 
-  searchParams.set('skip', getPageNum);
-  setUrl.search = searchParams.toString();
-  console.log(setUrl.toString());
+      const itemBox = document.querySelector(".listBox");
+      itemBox.innerHTML = "";
+
+      for (let i = 0; i < data.limit; i++) {
+        const addDivBox = document.createElement("div");
+
+        addDivBox.textContent = data.products[i].title;
+        itemBox.appendChild(addDivBox);
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+    });
 }
 
 function getPageNumber(event) {
-  let getPageNum = event.target.dataset.page
-  goToPage(getPageNum)
+  let getPageNum = event.target.dataset.page;
+  goToPage((getPageNum - 1) * 5);
 }
 
-const pageNumBox = document.querySelector(".page_num_box");
+const pageNumBox = document.querySelector(".page_num_box"); // 페이징 숫자
 try {
   fetch(apiUrl)
     .then(function (res) {
@@ -49,7 +66,7 @@ try {
 
       const pagingBox = document.querySelector("#prevButton");
 
-      // 현재 페이지가 1보다 
+      // 현재 페이지가 1보다
       if (prev >= 1) {
         pagingBox.innerHTML += `<span>
                                   <img src="./images/pagenation_prev.svg" alt="페이지 넘기는 버튼" />
@@ -59,7 +76,7 @@ try {
       let next = lastNumber + 1;
       console.log(next);
 
-      if(next < totalPage){
+      if (next < totalPage) {
         console.log(next < totalPage);
       }
 
@@ -71,12 +88,11 @@ try {
 
       for (let i = 0; i < data.limit; i++) {
         const addDivBox = document.createElement("div");
-        
+
         addDivBox.textContent = data.products[i].title;
         itemBox.appendChild(addDivBox);
       }
-
     });
 } catch (error) {
-  console.log(error);
+  console.error(error);
 }

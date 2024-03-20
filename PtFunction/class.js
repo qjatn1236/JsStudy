@@ -63,7 +63,7 @@ class studyClass {
 
     // 클릭한 요소가 +인지 -인지 체크
     event.classList[0].includes("Plus") ? (nowTotalAmountNumber += priceDot) : (nowTotalAmountNumber -= priceDot);
-    
+
     // const getClickPlusElement = event.classList[0].includes("Plus");
     // const getClickMinusElement = event.classList[0].includes("Minus");
 
