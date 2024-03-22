@@ -93,7 +93,7 @@ class BrowserHandler {
 
   getBrowser() {
     this.isOs = this.browserChecking();
-    
+
     console.log(this.isOs);
     console.log(this.isDataType);
   }
@@ -135,6 +135,20 @@ class BrowserHandler {
     if (ieName === "Microsoft Internet Explorer") {
       alert("IE는 지원하지 않습니다.");
       return "ie";
+    }
+  }
+
+  async getFetch() {
+    try {
+      const res = await fetch();
+      // fetch API는 네트워크 오류가 발생했을때만 프로미스를 거부하는 특징이있다.
+      if (!res.ok) {
+        console.log(`HTTP Error! status: ${res.status}`);
+      }
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error.message);
     }
   }
 }
