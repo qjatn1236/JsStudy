@@ -7,15 +7,15 @@
     <title>Document</title>
   </head>
   <body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="./class.js"></script>
 
     <script>
-      // const setInit = getFetchData.init();
-      // const goFetch = getFetchData.getData("https://jsonplaceholder.typicode.com/posts/1");
-
       const BROWSER = new BrowserHandler();
-      BROWSER.getBrowser();
+
+      BROWSER.getBrowser('https://jsonplaceholder.typicode.com/todos/1');
     </script>
   </body>
 </html>
